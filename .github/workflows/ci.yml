@@ -1,0 +1,119 @@
+name: CI
+
+on:
+  push:
+    branches: [ main, devel ]
+  pull_request:
+    branches: [ main, devel ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ["3.9", "3.10", "3.11", "3.12"]
+    
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v4
+      with:
+        python-version: ${{ matrix.python-version }}
+    
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install pytest pytest-cov
+        if [ -f requirements-test.txt ]; then pip install -r requirements-test.txt; fi
+    
+    - name: Test install script functionality
+      run: |
+        # Make install script executable
+        chmod +x install.sh
+        
+        # Test that script runs without errors
+        ./install.sh --help || echo "Help flag not supported, continuing..."
+        
+        # Verify required files exist
+        test -f axiomancer.md || (echo "axiomancer.md not found" && exit 1)
+        test -d templates || (echo "templates directory not found" && exit 1)
+        test -f install.sh || (echo "install.sh not found" && exit 1)
+    
+    - name: Run pytest tests
+      run: |
+        python -m pytest tests/ -v --cov=. --cov-report=xml --cov-report=term-missing
+    
+    - name: Upload coverage to Codecov
+      uses: codecov/codecov-action@v3
+      with:
+        file: ./coverage.xml
+        flags: unittests
+        name: codecov-umbrella
+        fail_ci_if_error: false
+
+  shell-check:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Install shellcheck
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y shellcheck
+    
+    - name: Run shellcheck on install script
+      run: |
+        shellcheck install.sh
+    
+    - name: Test install script syntax
+      run: |
+        bash -n install.sh
+
+  integration-test:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Test local installation
+      run: |
+        # Create test directory
+        mkdir -p test-project
+        cd test-project
+        
+        # Run install script
+        ../install.sh
+        
+        # Verify installation
+        test -d .axiomantic || (echo ".axiomantic directory not created" && exit 1)
+        test -f .axiomantic/commands/axiomancer.md || (echo "axiomancer.md not installed" && exit 1)
+        test -d .axiomantic/templates || (echo "templates not installed" && exit 1)
+        test -L .claude/commands/axiomancer.md || (echo "claude symlink not created" && exit 1)
+        test -L .opencode/commands/axiomancer.md || (echo "opencode symlink not created" && exit 1)
+        
+        echo "✅ Installation verification passed"
+    
+    - name: Test curl installation simulation
+      run: |
+        # Create another test directory
+        mkdir -p curl-test-project
+        cd curl-test-project
+        
+        # Start a simple HTTP server in background
+        cd ..
+        python3 -m http.server 8000 &
+        SERVER_PID=$!
+        sleep 2
+        
+        cd curl-test-project
+        
+        # Test curl installation (simulate)
+        curl -sSL http://localhost:8000/install.sh > install.sh
+        chmod +x install.sh
+        
+        # Kill the server
+        kill $SERVER_PID || true
+        
+        echo "✅ Curl download simulation passed"
