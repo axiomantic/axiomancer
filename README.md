@@ -2,6 +2,18 @@
 
 A comprehensive template system for bootstrapping high-quality software projects with systematic development workflows and intelligent AI coding assistant integration.
 
+### Quick Install
+
+```bash
+# Navigate to your project directory
+cd /path/to/your/project
+
+# Install and launch Axiomancer
+curl -sSL https://raw.githubusercontent.com/axiomantic/axiomancer/main/install.sh | bash
+```
+
+Then run the `/axiomancer` command in Claude Code or opencode to complete installation. 
+
 ## Overview
 
 Axiomancer is a complete project lifecycle tool that both **bootstraps new software projects from scratch** and **brings order to existing projects**. For new projects, it guides you through conception, technology selection, and complete project setup with industry best practices. For existing projects, it analyzes your codebase and creates a systematic development environment - giving you structured workflows, component tracking, quality gates, and a project-aware AI coding assistant that understands your specific architecture and patterns.
@@ -54,7 +66,7 @@ Specialized Claude prompt for both new project bootstrapping and existing projec
 
 ## Installation
 
-### Quick Install (Recommended)
+### Quick Install
 
 Install and launch Axiomancer in any project directory:
 
