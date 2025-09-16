@@ -111,6 +111,36 @@ Create a detailed implementation plan using this structure:
    - Complete documentation
    - Pass all quality gates
 
+### Phase 5: Status Management
+
+**2.11. Component Status Updates**
+
+**At Implementation Start:**
+- Update STATUS_MANIFEST.yaml: change component status from `PLANNED` to `IN_PROGRESS`
+- Add implementation start timestamp
+- Record assigned developer/session info
+
+**During Implementation:**
+- Document any discovered dependencies or blockers
+- Update effort estimates if significantly different from planned
+
+**At Implementation Completion:**
+- Change status from `IN_PROGRESS` to `USER_REVIEW`
+- Add completion timestamp and summary of changes
+- List files created/modified
+- Note any architectural implications or future considerations
+
+**Status Update Format:**
+```yaml
+components:
+  component-id:
+    status: USER_REVIEW
+    completed_date: "{{CURRENT_DATE}}"
+    files_modified: ["path/to/file1", "path/to/file2"]
+    implementation_notes: "Brief summary of what was implemented and any important decisions made"
+    review_checklist: ["Unit tests passing", "Integration tests passing", "Documentation updated"]
+```
+
 **2.11. Specific Code Templates**
 Provide skeleton code for key components:
 

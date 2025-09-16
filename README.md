@@ -2,21 +2,41 @@
 
 A comprehensive template system for bootstrapping high-quality software projects with systematic development workflows and intelligent AI coding assistant integration.
 
-### Quick Install
+## Quick Start
 
 ```bash
-# Navigate to your project directory
+# Navigate to your project directory (new or existing)
 cd /path/to/your/project
 
 # Install and launch Axiomancer
 curl -sSL https://raw.githubusercontent.com/axiomantic/axiomancer/main/install.sh | bash
 ```
 
-Then run the `/axiomancer` command in Claude Code or opencode to complete installation. 
+**Then run:** `claude /axiomancer` (or `opencode run /axiomancer`)
 
-## Overview
+## Table of Contents
 
-Axiomancer is a complete project lifecycle tool that both **bootstraps new software projects from scratch** and **brings order to existing projects**. For new projects, it guides you through conception, technology selection, and complete project setup with industry best practices. For existing projects, it analyzes your codebase and creates a systematic development environment - giving you structured workflows, component tracking, quality gates, and a project-aware AI coding assistant that understands your specific architecture and patterns.
+- [What is Axiomancer?](#what-is-axiomancer)
+- [Philosophy](#philosophy)
+- [The Template System](#the-template-system)
+- [How It Works](#how-it-works)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Project Management](#project-management)
+- [Key Principles](#key-principles)
+- [Project Structure](#project-structure)
+- [Features](#features)
+- [Examples](#examples)
+- [Success Metrics](#success-metrics)
+- [Philosophy in Practice](#philosophy-in-practice)
+
+## What is Axiomancer?
+
+Axiomancer is a **template-driven project organization system** that installs directly into your projects to provide:
+
+- **For New Projects**: Complete project bootstrapping from conception to working code
+- **For Existing Projects**: Systematic organization and documentation of your codebase
+- **For All Projects**: AI coding assistant integration with project-specific knowledge
 
 ## Philosophy
 
@@ -64,94 +84,153 @@ Comprehensive guide for bootstrapping new projects from conception through techn
 **`.claude/prompts/axiomancer.md`**  
 Specialized Claude prompt for both new project bootstrapping and existing project systematization. Guides technology selection, analyzes codebases, and creates complete documentation ecosystems.
 
+## How It Works
+
+1. **Install**: Run the install script in your project directory
+2. **Invoke**: Use `claude /axiomancer` to start the specialized assistant
+3. **Initialize**: The assistant analyzes your project and creates systematic documentation
+4. **Develop**: Use the generated project structure for organized development
+5. **Clean**: Installation files are automatically removed after setup
+
 ## Installation
 
-### Quick Install
+### Prerequisites
 
-Install and launch Axiomancer in any project directory:
+- **Claude CLI** or **OpenCode**: For AI assistant integration
+- **curl** and **unzip** (for remote installation)
+
+### Remote Install (Recommended)
 
 ```bash
 # Navigate to your project directory
 cd /path/to/your/project
 
-# Install and launch Axiomancer
+# Install Axiomancer
 curl -sSL https://raw.githubusercontent.com/axiomantic/axiomancer/main/install.sh | bash
 ```
 
-This will:
-1. Download the latest Axiomancer templates
-2. Set up the `.claude/` directory in your project
-3. Automatically launch Claude with the Axiomancer prompt (`claude /axiomancer`)
-4. Clean up installation files after successful bootstrap
-
-### Manual Install
+### Local Install
 
 ```bash
 # Clone the repository
 git clone https://github.com/axiomantic/axiomancer.git
-cd axiomancer
 
 # Navigate to your project directory
 cd /path/to/your/project
 
 # Run the install script
-/path/to/axiomancer/install.sh
+path/to/axiomancer/install.sh
 ```
 
-### Prerequisites
-
-- **Claude CLI**: Install from [Claude CLI Documentation](https://docs.anthropic.com/en/docs/tooling/claude-cli)
-- **curl** and **unzip** (for remote installation)
+**Both methods create:**
+- `.axiomantic/` directory with templates and commands
+- `.claude/commands/axiomancer.md` and `.opencode/commands/axiomancer.md` symlinks
+- Usage instructions in `.axiomantic/README.md`
 
 ## Usage
 
-### Understanding "Summon"
+The installation script automatically launches the Axiomancer assistant, which configures your project and then removes itself. After configuration, you use the generated project documentation.
 
-**Important**: When you "summon" a component, Axiomancer doesn't just create a plan - it **generates the plan AND immediately implements it completely**. A summon is a full end-to-end process that results in tested, working code ready for review.
+### User Stories & Workflows
 
-- `summon authentication-system` → Plan generated + Full implementation completed
-- `summon user-dashboard` → Plan generated + Complete component built
-- `summon data-processor` → Plan generated + All code and tests written
+#### 🆕 New Project Bootstrap
 
-### Bootstrap a New Project
-
+**Install & Initialize** (runs automatically):
 ```bash
-# Create and navigate to project directory
-mkdir my-new-project && cd my-new-project
-
-# Install and launch Axiomancer
+# In empty directory
 curl -sSL https://raw.githubusercontent.com/axiomantic/axiomancer/main/install.sh | bash
-
-# Then use prompts like:
-# "create TaskManager" or "bootstrap web application"
+# This automatically runs the Axiomancer assistant for you
 ```
 
-The axiomancer will:
-1. **Interview you about requirements** (purpose, users, technical needs)
-2. **Recommend appropriate technology stack** (languages, frameworks, tools)
-3. **Create complete project structure** with configuration files
-4. **Generate systematic documentation** and development workflow
-5. **Set up quality gates** and testing framework
-
-### Organize an Existing Project
-
-```bash
-# Navigate to your existing project directory
-cd /path/to/your/project
-
-# Install and launch Axiomancer
-curl -sSL https://raw.githubusercontent.com/axiomantic/axiomancer/main/install.sh | bash
-
-# Then use prompts like:
-# "organize this project" or "bring order to this codebase"
+**Provide Project Details** with detailed instructions:
+```
+"create TaskManager - a web app for team task management with user authentication, project organization, real-time updates, and deadline tracking. Use TypeScript, React, and Node.js with PostgreSQL."
 ```
 
-The axiomancer will:
-1. **Analyze your project structure** (languages, frameworks, existing patterns)
-2. **Create architectural guides** that map your actual codebase structure
-3. **Generate component tracking system** reflecting real architecture boundaries
-4. **Set up AI coding assistant configuration** tailored to your specific project
-5. **Establish systematic development workflow** using your existing tools
+Or start simple and let it interview you:
+```
+"bootstrap web application"
+"create mobile app"
+```
+
+**What Happens During Bootstrap**:
+1. **Requirements gathering** through interactive interview or from your detailed prompt
+2. **Technology stack recommendation** and finalization
+3. **System architecture document creation** (`SYSTEM_ARCHITECTURE.md`) with your specific technical design
+4. **Implementation plan generation** (`STATUS_MANIFEST.yaml`) with all components identified
+5. **Project structure setup** with configuration files and development workflow
+6. **AI assistant configuration** (`AGENT.md`) tuned to your project
+
+**Result**: Complete project with architecture docs, implementation roadmap, and systematic development process
+
+#### 🔧 Existing Project Organization
+
+**Install & Analyze** (runs automatically):
+```bash
+# In existing project directory
+curl -sSL https://raw.githubusercontent.com/axiomantic/axiomancer/main/install.sh | bash
+# This automatically runs the Axiomancer assistant for you
+```
+
+**Guide the Analysis** with context:
+```
+"systematize this codebase - it's a Python Flask API with SQLAlchemy, handles user management and data processing. Focus on the authentication system and API endpoints structure."
+```
+
+Or let it discover everything:
+```
+"organize this project"
+"bring order to this codebase"
+```
+
+**What Happens During Organization**:
+1. **Codebase analysis** of languages, frameworks, existing patterns, and architecture
+2. **System architecture documentation** (`SYSTEM_ARCHITECTURE.md`) mapping your actual code structure
+3. **Component identification** and status tracking (`STATUS_MANIFEST.yaml`) based on real boundaries
+4. **Development workflow establishment** using your existing tools and practices
+5. **AI assistant configuration** (`AGENT.md`) with project-specific knowledge
+
+**Result**: Organized project with documentation that reflects your actual codebase and systematic development process
+
+#### ⚡ Component Implementation
+
+**After Project Initialization**:
+```bash
+# Use the generated AI assistant configuration
+claude --prompt AGENT.md
+```
+
+**Provide Detailed Implementation Instructions**:
+```
+"summon authentication-system - implement JWT-based auth with login, logout, token refresh, password reset via email, and role-based permissions. Include rate limiting and security headers."
+```
+
+**Or Use Simple Commands**:
+```
+"summon user-dashboard"
+"summon data-processor"
+```
+
+**What Happens During Summon**:
+1. **Implementation plan creation** in `plans/` directory with detailed technical specifications
+2. **Complete implementation** following Three Rings of Validation:
+   - Write failing tests first (Inner Ring)
+   - Implement functionality (Middle Ring)
+   - Pass quality gates (Outer Ring)
+3. **Component status progression** `PLANNED` → `IN_PROGRESS` → `USER_REVIEW` → `COMPLETED`
+
+**Result**: Fully implemented, tested component with documentation ready for review
+
+**Important**: "Summon" is an end-to-end process that generates plans AND implements them completely!
+
+### Key Differences: New vs Existing Projects
+
+| Aspect | New Project | Existing Project |
+|--------|-------------|------------------|
+| **Architecture Docs** | Created from requirements | Created from code analysis |
+| **Component Plan** | Based on feature planning | Based on existing code structure |
+| **Development Workflow** | New best practices setup | Integrated with existing tools |
+| **Quality Gates** | New testing framework | Uses existing test setup |
 
 ### Generated Project Organization
 
@@ -160,7 +239,7 @@ After initialization, your project will have a complete organizational framework
 ```
 project/
 ├── AGENT.md              # AI coding assistant configuration
-├── CLAUDE.md             # Symlink to AGENT.md  
+├── CLAUDE.md             # Symlink to AGENT.md
 ├── AGENTS.md             # Symlink to AGENT.md
 ├── SYSTEM_ARCHITECTURE.md # Architectural guide mapping your codebase
 ├── CONTRIBUTING.md       # Development workflow and quality standards
@@ -168,23 +247,69 @@ project/
 ├── STATUS_MANIFEST.yaml # Component tracking and dependency management
 ├── GLOSSARY.md          # Project terminology and concepts
 └── plans/               # Component-specific implementation plans
-    └── (generated as needed)
-
-Note: The .claude/ installation directory is automatically cleaned up after successful bootstrap.
+    └── (generated during summon commands)
 ```
 
-### Development Workflow
+**Note**: The `.axiomantic/` installation directory is automatically cleaned up after successful bootstrap to keep your project clean.
 
-1. **Component Selection**: Choose `PLANNED` component from `STATUS_MANIFEST.yaml`
-2. **Summon Component**: Request "summon [component-id]" which will:
-   - Generate a detailed implementation plan
-   - **Immediately begin implementation** following Three Rings of Validation:
-     - Write failing tests first (Inner Ring)
-     - Implement functionality (Middle Ring)  
-     - Pass quality gates (Outer Ring)
-3. **Review Process**: Component automatically updated to `USER_REVIEW` → Human approval → `COMPLETED`
+### Development Workflow Summary
 
-**Important**: "Summon" is a complete end-to-end process that generates the plan AND implements it immediately. It's not just planning - it's full implementation to completion.
+1. **Install Axiomancer** → Automatic project analysis and documentation generation
+2. **Review Generated Docs** → `SYSTEM_ARCHITECTURE.md`, `STATUS_MANIFEST.yaml`, etc.
+3. **Start Development** → `claude --prompt AGENT.md` for component work
+4. **Select Components** → Choose `PLANNED` items from `STATUS_MANIFEST.yaml`
+5. **Summon & Implement** → Complete end-to-end implementation with testing
+6. **Review & Approve** → Component moves from `USER_REVIEW` to `COMPLETED`
+
+## Project Management
+
+### Project Status Overview
+- **`STATUS_MANIFEST.yaml`** - Central dashboard showing all components and their current status
+- **Component Statuses**: `PLANNED` → `IN_PROGRESS` → `USER_REVIEW` → `COMPLETED`
+- **Dependencies**: Clear tracking of component dependencies and implementation order
+- **Effort Estimates**: Time estimates for each component to aid in planning
+
+### Updating Plans and Architecture
+
+**Add New Components to Plan**:
+```bash
+claude --prompt AGENT.md
+# Then: "add component user-notifications to the plan - handles email, SMS, and push notifications with templating and scheduling"
+```
+
+**Update System Architecture**:
+```bash
+claude --prompt AGENT.md
+# Then: "update system architecture to reflect the new microservices pattern we're adopting"
+```
+
+**Modify Component Specifications**:
+```bash
+claude --prompt AGENT.md
+# Then: "update the authentication component to use OAuth2 instead of JWT tokens"
+```
+
+### How System Architecture Gets Created
+
+**For New Projects** - Interactive Interview Process:
+1. **Project Purpose**: What problem does this solve? Who are the users?
+2. **Technical Requirements**: Type of application, platforms, performance needs
+3. **Technology Preferences**: Existing constraints, team experience, preferred stack
+4. **Architecture Design**: Based on requirements, creates detailed technical architecture
+5. **Component Planning**: Breaks down architecture into implementable components
+6. **Template Population**: Fills in `{{PROJECT_NAME}}`, `{{ARCHITECTURE_TYPE}}`, etc. in templates
+
+**For Existing Projects** - Code Analysis Process:
+1. **Codebase Scanning**: Analyzes existing files, frameworks, and patterns
+2. **Architecture Discovery**: Maps actual structure and component boundaries
+3. **Documentation Creation**: Creates architecture docs reflecting real codebase
+4. **Gap Identification**: Identifies missing components or improvement opportunities
+5. **Integration Planning**: Plans how to integrate systematic development into existing workflow
+
+**User Can Provide Details**: Instead of full interview, you can give comprehensive requirements:
+```
+"create TaskManager - a web application for team task management with user authentication, project organization, real-time collaboration, deadline tracking, and reporting. Target 100+ concurrent users, needs mobile responsiveness, integrate with Slack/email, use TypeScript/React frontend with Node.js/PostgreSQL backend, deploy on AWS with Docker containers."
+```
 
 ## Key Principles
 
