@@ -1,6 +1,6 @@
 # Axiomancer: Project Template System
 
-A comprehensive template system for bootstrapping high-quality software projects with systematic development workflows and intelligent AI coding assistant integration.
+A comprehensive prompt template system for bootstrapping high-quality software projects with systematic development workflows and intelligent AI coding assistant integration.
 
 ## Quick Start
 
