@@ -7,9 +7,9 @@ A comprehensive template system for bootstrapping high-quality software projects
 ```bash
 # Navigate to your project directory (new or existing)
 cd /path/to/your/project
-
-# Install and launch Axiomancer
 curl -sSL https://raw.githubusercontent.com/axiomantic/axiomancer/main/install.sh | bash
+claude /axiomancer
+# or `opencode run /axiomancer`
 ```
 
 **Then run:** `claude /axiomancer` (or `opencode run /axiomancer`)
@@ -79,11 +79,6 @@ Template for generating detailed, component-specific implementation plans ("Scro
 **`templates/PROJECT_BOOTSTRAP.md`**  
 Comprehensive guide for bootstrapping new projects from conception through technology selection and initial implementation structure.
 
-### The Axiomancer Assistant
-
-**`.claude/prompts/axiomancer.md`**  
-Specialized Claude prompt for both new project bootstrapping and existing project systematization. Guides technology selection, analyzes codebases, and creates complete documentation ecosystems.
-
 ## How It Works
 
 1. **Install**: Run the install script in your project directory
@@ -102,30 +97,22 @@ Specialized Claude prompt for both new project bootstrapping and existing projec
 ### Remote Install (Recommended)
 
 ```bash
-# Navigate to your project directory
+# Navigate to your project directory (new or existing)
 cd /path/to/your/project
-
-# Install Axiomancer
 curl -sSL https://raw.githubusercontent.com/axiomantic/axiomancer/main/install.sh | bash
+claude /axiomancer
+# or `opencode run /axiomancer`
 ```
 
 ### Local Install
 
 ```bash
-# Clone the repository
 git clone https://github.com/axiomantic/axiomancer.git
-
-# Navigate to your project directory
-cd /path/to/your/project
-
-# Run the install script
-path/to/axiomancer/install.sh
+cd axiomancer
+./install.sh /path/to/your/project
+claude /axiomancer
+# or `opencode run /axiomancer`
 ```
-
-**Both methods create:**
-- `.axiomantic/` directory with templates and commands
-- `.claude/commands/axiomancer.md` and `.opencode/commands/axiomancer.md` symlinks
-- Usage instructions in `.axiomantic/README.md`
 
 ## Usage
 
@@ -137,20 +124,22 @@ The installation script automatically launches the Axiomancer assistant, which c
 
 **Install & Initialize** (runs automatically):
 ```bash
-# In empty directory
+mkdir my-project
+cd my-project
 curl -sSL https://raw.githubusercontent.com/axiomantic/axiomancer/main/install.sh | bash
-# This automatically runs the Axiomancer assistant for you
+claude /axiomancer
+# or `opencode run /axiomancer`
 ```
 
 **Provide Project Details** with detailed instructions:
-```
-"create TaskManager - a web app for team task management with user authentication, project organization, real-time updates, and deadline tracking. Use TypeScript, React, and Node.js with PostgreSQL."
+```bash
+claude "create TaskManager - a web app for team task management with user authentication, project organization, real-time updates, and deadline tracking. Use TypeScript, React, and Node.js with PostgreSQL."
 ```
 
 Or start simple and let it interview you:
 ```
-"bootstrap web application"
-"create mobile app"
+claude "bootstrap web application"
+claude "create mobile app"
 ```
 
 **What Happens During Bootstrap**:
@@ -169,18 +158,19 @@ Or start simple and let it interview you:
 ```bash
 # In existing project directory
 curl -sSL https://raw.githubusercontent.com/axiomantic/axiomancer/main/install.sh | bash
-# This automatically runs the Axiomancer assistant for you
+claude /axiomancer
+# or `opencode run /axiomancer`
 ```
 
 **Guide the Analysis** with context:
-```
-"systematize this codebase - it's a Python Flask API with SQLAlchemy, handles user management and data processing. Focus on the authentication system and API endpoints structure."
+```bash
+claude "systematize this codebase - it's a Python Flask API with SQLAlchemy, handles user management and data processing. Focus on the authentication system and API endpoints structure."
 ```
 
 Or let it discover everything:
-```
-"organize this project"
-"bring order to this codebase"
+```bash
+claude "organize this project"
+claude "bring order to this codebase"
 ```
 
 **What Happens During Organization**:
@@ -194,21 +184,15 @@ Or let it discover everything:
 
 #### ⚡ Component Implementation
 
-**After Project Initialization**:
-```bash
-# Use the generated AI assistant configuration
-claude --prompt AGENT.md
-```
-
 **Provide Detailed Implementation Instructions**:
-```
-"summon authentication-system - implement JWT-based auth with login, logout, token refresh, password reset via email, and role-based permissions. Include rate limiting and security headers."
+```bash
+claude "summon authentication-system - implement JWT-based auth with login, logout, token refresh, password reset via email, and role-based permissions. Include rate limiting and security headers."
 ```
 
 **Or Use Simple Commands**:
-```
-"summon user-dashboard"
-"summon data-processor"
+```bash
+claude "summon user-dashboard"
+claude "summon data-processor"
 ```
 
 **What Happens During Summon**:
@@ -250,13 +234,13 @@ project/
     └── (generated during summon commands)
 ```
 
-**Note**: The `.axiomantic/` installation directory is automatically cleaned up after successful bootstrap to keep your project clean.
+**Note**: The `.axiomancer/` installation directory is automatically cleaned up after successful bootstrap to keep your project clean.
 
 ### Development Workflow Summary
 
 1. **Install Axiomancer** → Automatic project analysis and documentation generation
 2. **Review Generated Docs** → `SYSTEM_ARCHITECTURE.md`, `STATUS_MANIFEST.yaml`, etc.
-3. **Start Development** → `claude --prompt AGENT.md` for component work
+3. **Start Development** → `claude AGENT.md` for component work
 4. **Select Components** → Choose `PLANNED` items from `STATUS_MANIFEST.yaml`
 5. **Summon & Implement** → Complete end-to-end implementation with testing
 6. **Review & Approve** → Component moves from `USER_REVIEW` to `COMPLETED`
@@ -273,20 +257,17 @@ project/
 
 **Add New Components to Plan**:
 ```bash
-claude --prompt AGENT.md
-# Then: "add component user-notifications to the plan - handles email, SMS, and push notifications with templating and scheduling"
+claude "add component user-notifications to the plan - handles email, SMS, and push notifications with templating and scheduling"
 ```
 
 **Update System Architecture**:
 ```bash
-claude --prompt AGENT.md
-# Then: "update system architecture to reflect the new microservices pattern we're adopting"
+claude "update system architecture to reflect the new microservices pattern we're adopting"
 ```
 
 **Modify Component Specifications**:
 ```bash
-claude --prompt AGENT.md
-# Then: "update the authentication component to use OAuth2 instead of JWT tokens"
+claude "update the authentication component to use OAuth2 instead of JWT tokens"
 ```
 
 ### How System Architecture Gets Created
@@ -307,8 +288,8 @@ claude --prompt AGENT.md
 5. **Integration Planning**: Plans how to integrate systematic development into existing workflow
 
 **User Can Provide Details**: Instead of full interview, you can give comprehensive requirements:
-```
-"create TaskManager - a web application for team task management with user authentication, project organization, real-time collaboration, deadline tracking, and reporting. Target 100+ concurrent users, needs mobile responsiveness, integrate with Slack/email, use TypeScript/React frontend with Node.js/PostgreSQL backend, deploy on AWS with Docker containers."
+```bash
+claude "create TaskManager - a web application for team task management with user authentication, project organization, real-time collaboration, deadline tracking, and reporting. Target 100+ concurrent users, needs mobile responsiveness, integrate with Slack/email, use TypeScript/React frontend with Node.js/PostgreSQL backend, deploy on AWS with Docker containers."
 ```
 
 ## Key Principles
