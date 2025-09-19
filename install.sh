@@ -10,7 +10,7 @@ AXIOMANTIC_DIR=".axiomantic"
 CLAUDE_DIR=".claude"
 OPENCODE_DIR=".opencode"
 GITHUB_REPO="axiomantic/axiomancer"
-GITHUB_BRANCH="devel"
+GITHUB_BRANCH="main"
 
 # Handle command line arguments
 if [[ $# -gt 0 ]]; then
